@@ -18,6 +18,7 @@ R1                              # Root directory
 ├── src                         # Source code for training
 ├── trl                         # Customized TRL library for RL training         
 └── requirements.txt            # Python dependencies
+```
 
 ## Installation
 1. Install the modified TRL library
