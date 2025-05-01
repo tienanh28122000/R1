@@ -1,0 +1,48 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B-Instruct
+model_revision: main
+torch_dtype: bfloat16
+attn_implementation: flash_attention_2
+
+# Data training arguments
+dataset_name: openai/gsm8k
+system_prompt: "Respond in the following format:\n<reasoning>\n...\n</reasoning>\n<answer>\n...\n</answer>"
+
+# GRPO trainer config
+output_dir: outputs/Qwen-1.5B-GRPO_vllm
+run_name: Qwen-1.5B-GRPO-gsm8k
+learning_rate: 5e-6
+adam_beta1: 0.9
+adam_beta2: 0.99
+# beta: 0.01
+weight_decay: 0.1
+warmup_ratio: 0.1
+lr_scheduler_type: cosine
+logging_steps: 1
+bf16: true
+per_device_train_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 4
+num_generations: 16
+max_prompt_length: 256
+max_completion_length: 512
+num_train_epochs: 1
+save_total_limit: 2
+save_steps: 200
+max_grad_norm: 0.1
+report_to: wandb
+log_on_each_node: false
+do_eval: true
+eval_steps: 100
+eval_strategy: steps
+use_vllm: true
+reward_funcs:
+- correctness
+- int
+- strict_format
+- soft_format
+- xml
+- majority_voting
+eval_funcs:
+- extractive_match
+seed: 42
