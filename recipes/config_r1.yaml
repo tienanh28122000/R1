@@ -34,7 +34,8 @@ max_grad_norm: 0.1
 report_to: wandb
 log_on_each_node: false
 do_eval: true
-eval_steps: 100
+eval_steps: 50
+max_items_eval: 200
 eval_strategy: steps
 use_vllm: true
 reward_funcs:

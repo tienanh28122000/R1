@@ -13,6 +13,7 @@ This repository contains the code for reproducing the **DeepSeek-R1** reinforcem
 ```bash
 R1                              # Root directory
 ├── recipes                     # YAML config files for different experiments
+├── resources                   # Report and media files
 ├── scripts                     # Training and evaluation scripts
 ├── src                         # Source code for training
 ├── trl                         # Customized TRL library for RL training         
@@ -67,6 +68,31 @@ For a detailed analysis of the model's response behavior, use the `analyze.py` s
 - All experiment configurations for different reward functions are stored in the `recipes` directory. Each YAML file contains the training arguments for a specific experiment.
 - For custom evaluation during training, refer to the latest commit of the forked TRL library: https://github.com/tienanh28122000/trl/commit/55249af2698942ee85db3e55c37e44dca21fc644 
 
+## Training Experiments & Visualization
+
+### List of experiments
+
+1. R1 -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/1u4o14qg?nw=nwusertienanh28122000
+2. "L1: Controlling How Long A Reasoning Model Thinks With Reinforcement Learning" (https://arxiv.org/abs/2503.04697) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/fgstfwe7?nw=nwusertienanh28122000
+3. "Demystifying Long Chain-of-Thought Reasoning in LLMs" (https://arxiv.org/abs/2502.03373) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/k8rv0303?nw=nwusertienanh28122000
+4. "Training Language Models to Reason Efficiently" (https://arxiv.org/abs/2502.04463) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/aurxu9n0?nw=nwusertienanh28122000
+5. Voting Reward -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/myycfwsy?nw=nwusertienanh28122000
+6. Group Intrinsic Reward -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/ijx7h91v?nw=nwusertienanh28122000
+7. Completion Intrinsic Reward -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/488zswmt?nw=nwusertienanh28122000
+
+### Visualization
+
+- Correctness Reward: 
+![correctness_reward](resources/correctness_reward.png)
+
+- Integer Reward:
+![integer_reward](resources/int_reward.png)
+
+- Xml Reward:
+![xml_reward](resources/xml_reward.png)
+
+- Model's performance on the test data every 50 training steps (Extractive Match Metric):
+![extractive_match](resources/extractive_match.png)
 
 ## Acknowledgements
 
