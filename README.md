@@ -73,7 +73,7 @@ For a detailed analysis of the model's response behavior, use the `analyze.py` s
 
 ### List of experiments
 
-1. R1 -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/1u4o14qg?nw=nwusertienanh28122000
+1. R1 -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/8xf9yy6n?nw=nwusertienanh28122000
 2. "L1: Controlling How Long A Reasoning Model Thinks With Reinforcement Learning" (https://arxiv.org/abs/2503.04697) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/fgstfwe7?nw=nwusertienanh28122000
 3. "Demystifying Long Chain-of-Thought Reasoning in LLMs" (https://arxiv.org/abs/2502.03373) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/k8rv0303?nw=nwusertienanh28122000
 4. "Training Language Models to Reason Efficiently" (https://arxiv.org/abs/2502.04463) -> https://wandb.ai/tienanh28122000-vingroup/huggingface/runs/aurxu9n0?nw=nwusertienanh28122000
