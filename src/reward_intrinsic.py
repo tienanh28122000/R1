@@ -11,9 +11,6 @@ class DynamicRewardCalculator:
     Calculates rewards for language model completions, incorporating a
     diversity incentive for correct reasoning steps based on their similarity
     to the centroid of the top-k nearest successful examples from a LanceDB table.
-
-    This version simplifies the previous implementation by removing the dynamic
-    threshold, EMA, minimum sample counts, and failure penalty logic.
     """
     def __init__(self,
                  success_table,
@@ -53,7 +50,6 @@ class DynamicRewardCalculator:
         # --- Embedding Client ---
         # Using OpenAI based on the provided example's structure
         # WARNING: Assumes OPENAI_API_KEY is set in environment variables.
-        # No try/except blocks are used as requested for simplification.
         self.client = OpenAI()
         # Basic check
         self.client.models.list()
@@ -76,26 +72,22 @@ class DynamicRewardCalculator:
 
     def extract_reasoning(self, text: str) -> str:
         """
-        Extracts the reasoning part from the completion text (content between <reasoning> tags).
-        Returns an empty string if tags are not found or content is empty.
+        Extracts the reasoning part from the completion text.
         """
-        try:
-            reasoning = text.split("<reasoning>")[-1].split("</reasoning>")[0]
-            return reasoning.strip()
-        except IndexError:
-            return "" # Return empty string if tags are not found or format is unexpected
+        # Split by the <reasoning> tag and then by the </reasoning> tag
+        answer = text.split("</reasoning>")[0]
+        answer = answer.split("<reasoning>")[-1]
+        return answer.strip()
 
 
     def extract_answer(self, text: str) -> str:
         """
         Extracts the answer part from the completion text (content between <answer> tags).
-        Returns an empty string if tags are not found or content is empty.
         """
-        try:
-            answer = text.split("<answer>")[-1].split("</answer>")[0]
-            return answer.strip()
-        except IndexError:
-            return "" # Return empty string if tags are not found or format is unexpected
+        # Split by the <answer> tag and then by the </answer> tag
+        answer = text.split("<answer>")[-1]
+        answer = answer.split("</answer>")[0]
+        return answer.strip()
 
 
     def cosine_similarity(self, vec1: np.ndarray, vec2: np.ndarray) -> float:

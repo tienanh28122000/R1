@@ -35,7 +35,6 @@ class DiversityRewardCalculator:
         # --- Embedding Client ---
         # Using OpenAI based on the provided example's structure
         # WARNING: Assumes OPENAI_API_KEY is set in environment variables.
-        # No try/except blocks are used as requested.
         self.client = OpenAI()
 
         # If using SentenceTransformer:
@@ -87,7 +86,6 @@ class DiversityRewardCalculator:
         """
         Calculates the cosine similarity between two vectors.
         Returns a float between -1 and 1.
-        *** WARNING: Removed handling for zero vectors or division by zero. Possible crash. ***
         Handles near-zero vectors explicitly to avoid division by zero.
         """
         norm_a = np.linalg.norm(vec1)

@@ -12,12 +12,12 @@ system_prompt: "Respond in the following format:\n<reasoning>\n...\n</reasoning>
 output_dir: outputs/Qwen-1.5B-GRPO_vllm
 run_name: Qwen-1.5B-GRPO-gsm8k
 learning_rate: 5e-6
-adam_beta1: 0.9
-adam_beta2: 0.99
-# beta: 0.01
-weight_decay: 0.1
-warmup_ratio: 0.1
-lr_scheduler_type: cosine
+adam_beta1: 0.9 # AdamW optimizer
+adam_beta2: 0.99 # AdamW optimizer
+# beta: 0.01 # KL coefficient. If `0.0`, the reference model is not loaded, reducing memory usage and improving training speed, but may be numerically unstable for long training runs.
+weight_decay: 0.1 # Regularization to prevent overfitting by penalizing large weights (large weights -> overfit to sample, not generalize).
+warmup_ratio: 0.1 # First 10% of training steps gradually increase LR from 0 to the peak. Helps stabilize early training.
+lr_scheduler_type: cosine # Learning rate decays using a cosine schedule — fast decay initially, then slow.
 logging_steps: 1
 bf16: true
 per_device_train_batch_size: 4
@@ -29,7 +29,7 @@ max_completion_length: 512
 num_train_epochs: 1
 save_total_limit: 2
 save_steps: 200
-max_grad_norm: 0.1
+max_grad_norm: 0.1 # Gradient clipping to prevent exploding gradients.
 report_to: wandb
 log_on_each_node: false
 do_eval: true

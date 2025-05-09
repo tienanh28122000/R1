@@ -107,6 +107,9 @@ class CosineScaledSparseReward:
 
             progress = gen_len / self.max_len
             cosine = math.cos(progress * math.pi)
+            # Comes from 0.5*(1+cos(x)) range from [0,1] -> use min and max values to scale range to [min, max]
+            # If score is 1, the ratio progress is control the reward, if gen_len is small, the reward is high, otherwise low
+            # If score is 0, the ratio progress is control the penalty, if gen_len is small, the penalty is high, otherwise low
             r = min_value + 0.5 * (max_value - min_value) * (1.0 + cosine)
             r += rep_penalty
 

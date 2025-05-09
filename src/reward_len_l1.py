@@ -10,8 +10,8 @@ def extract_xml_answer(text: str) -> str:
     return answer.strip()
 
 def get_delta_score_max(num_tokens: int, used_tokens: int):
-    alpha = 1/500
-    beta = alpha
+    alpha = 1/500 # coefficient for the positive part
+    beta = alpha # coefficient for the negative part
 
     delta = used_tokens - abs(num_tokens)
     sc = 0
@@ -21,11 +21,13 @@ def get_delta_score_max(num_tokens: int, used_tokens: int):
         sc = alpha * delta * -1
     # Clip sc to [-1, 1]
     sc = max(-1, min(1, sc))
+    # Add delta_constant = 1/2 and normalize to [0,1]
     return (sc + 1)/2
 
 def get_delta_score_exact(num_tokens: int, used_tokens: int):
     # z_score = abs(used_tokens - num_tokens) / (num_tokens/2)
-    z_score = abs(used_tokens - num_tokens) / (3000)
+    alpha = 1/3000
+    z_score = abs(used_tokens - num_tokens) * alpha
     
     delta_score = 1 - z_score
     return delta_score

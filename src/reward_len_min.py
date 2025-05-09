@@ -28,6 +28,7 @@ def reward_len_min(prompts, completions, answer, tokenizer, alpha=1):
     for response, response_len, accuracy in zip(responses, lens, scores):
 
         if accuracy > 0:
+            # 1e-7 is to avoid division by zero
             relative_length = (response_len - np.mean(lens)) / (np.std(lens) + 1e-7) # Reward only when answer is correct.
             reward = accuracy * (1 - alpha * (sigmoid(relative_length)))
         else:
